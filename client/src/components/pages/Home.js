@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Navbar from '../Navbar';
-import Jumbotron from '../Jumbotron';
+import Navbar from '../Navbar/Navbar';
+import Jumbotron from '../Jumbotron/Jumbotron';
 import API from '../../utilities/api';
-import ResultsCard from '../ResultsCard';
-import SearchForm from '../SearchForm';
+import ResultsCard from '../ResultsCard/ResultsCard';
+import SearchForm from '../SearchForm/SearchForm';
 
 class Home extends Component {
     state = {
@@ -19,7 +19,7 @@ class Home extends Component {
                 console.log('Books: ', this.state.books)
             })
             .catch(err => {
-                console.log(err);
+                throw err;
             })
     };
 
@@ -32,10 +32,11 @@ class Home extends Component {
         event.preventDefault();
         API.getGoogleBooks(this.state.title)
             .then(res => {
+                console.log(res.data);
                 this.setState({ results: res.data.items })
             })
             .catch(err => {
-                console.log(err);
+                throw err;
             })
     };
 
@@ -50,7 +51,7 @@ class Home extends Component {
             title: targetBook[0].volumeInfo.title,
             author: targetBook[0].volumeInfo.author,
             description: targetBook[0].volumeInfo.description,
-            image: targetBook[0].volumeInfo.imageLinks.thumbnail,
+            // image: targetBook[0].volumeInfo.imageLinks.smallThumbnail,
             link: targetBook[0].volumeInfo.infoLink
         };
 
@@ -65,7 +66,7 @@ class Home extends Component {
                 title: targetBook[0].volumeInfo.title,
                 author: targetBook[0].volumeInfo.author,
                 description: targetBook[0].volumeInfo.description,
-                image: targetBook[0].volumeInfo.imageLinks.thumbnail,
+                // image: targetBook[0].volumeInfo.imageLinks.smallThumbnail,
                 link: targetBook[0].volumeInfo.infoLink
             });
         }
@@ -73,31 +74,31 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <Navbar />
-                <Jumbotron />
-                <div className='container'>
-                    <SearchForm 
-                        handleFormSubmit = {this.handleFormSubmit}
-                        handleInputChange = {this.handleInputChange} />
-                        <div className='container-fluid' id='mainContent'>
-                            {this.state.results.map((book) => {
-                                return (
-                                    <ResultsCard
-                                        key= {book.id}
-                                        title= {book.volumeInfo.title}
-                                        id= {book.id}
-                                        link= {book.volumeInfo.infoLink}
-                                        author= {book.volumeInfo.author}
-                                        image= {book.volumeInfo.imageLinks.thumbnail}
-                                        description= {book.volumeInfo.description}
-                                        saveBook= {this.handleSavedBooks}
-                                    />
-                                )
-                            })}
-                        </div>
-                </div>
+            <>
+            <Navbar />
+            <div className='container'>
+            <Jumbotron />
+                <SearchForm 
+                    handleFormSubmit = {this.handleFormSubmit}
+                    handleInputChange = {this.handleInputChange} />
+                    <div className='results-container' id='mainContent'>
+                        {this.state.results.map((book) => {
+                            return (
+                                <ResultsCard
+                                    key= {book.id}
+                                    title= {book.volumeInfo.title}
+                                    id= {book.id}
+                                    link= {book.volumeInfo.infoLink}
+                                    authors= {book.volumeInfo.authors[0]}
+                                    // image= {book.volumeInfo.imageLinks.smallThumbnail}
+                                    description= {book.volumeInfo.description}
+                                    saveBook= {this.handleSavedBooks}
+                                />
+                            )
+                        })}
+                    </div>
             </div>
+            </>
         )
     }
 };

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Navbar from '../Navbar'
-import Jumbotron from '../Jumbotron'
-import API from '../../utils/api'
-import ResultCard from "../ResultCard";
+import Navbar from '../Navbar/Navbar'
+import Jumbotron from '../Jumbotron/Jumbotron'
+import API from '../../utilities/api';
+import ResultCard from "../ResultsCard/ResultsCard";
 
 class Saved extends Component {
     state = {
