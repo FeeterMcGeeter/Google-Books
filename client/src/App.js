@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/pages/Home';
+import Search from './components/pages/Search';
 import Saved from './components/pages/Saved';
 import './App.css';
 
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <Router>
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={Search} />
             <Route exact path='/saved' component={Saved} />
           </Switch>
       </Router>

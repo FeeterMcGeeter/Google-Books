@@ -23,7 +23,9 @@ app.get("*", (req, res) => {
 });
 
 // CONNECT TO THE MONGO DATABASE
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/googleBooks', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/google_books' , { useNewParser: true }, function(error) {
+    console.log('connected to mongo database');
+  }); 
 
 // START THE SERVER
 app.listen(PORT, () => {

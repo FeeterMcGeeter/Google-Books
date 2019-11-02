@@ -13,7 +13,7 @@ class Saved extends Component {
         API.getBooks()
             .then(res => {
                 this.setState({ results: res.data });
-                console.log('Results:', this.state.results)
+                console.log('Results:', this.state.results);
             })
             .catch(err => {
                 console.log(err);
@@ -22,8 +22,8 @@ class Saved extends Component {
 
     handleDeleteBook = event => {
         event.preventDefault();
-        const bookID = event.target.attr('data-id')
-        const newState = { ...this.state }
+        const bookID = event.target.getAttribute('data-id');
+        const newState = { ...this.state };
         newState.results = this.state.results.filter(book => book._id !== bookID)
 
         API.deleteBook(bookID).then(
@@ -42,25 +42,25 @@ class Saved extends Component {
         return (
             <div>
                 <Navbar />
-                <Jumbotron />
                 <div className='container'>
-                    <h3>Saved Books</h3>
-                    <div className='container-fluid' id='mainContent'>
-                        {this.state.results.map((book) => {
-                            return (
-                                <ResultCard
-                                    key={book._id}
-                                    title={book.title}
-                                    id={book._id}
-                                    link={book.link}
-                                    author={book.authors}
-                                    image={book.image}
-                                    description={book.description}
-                                    deleteBook={this.handleDeleteBook}
-                                />
-                            )
-                        })}
-                    </div>
+                    <Jumbotron />
+                        <h3>Saved Books</h3>
+                        <div className='container-fluid' id='mainContent'>
+                            {this.state.results.map((book) => {
+                                return (
+                                    <ResultCard
+                                        key={book._id}
+                                        title={book.title}
+                                        id={book._id}
+                                        link={book.infoLink}
+                                        author={book.authors[0]}
+                                        image={book.image}
+                                        description={book.description}
+                                        deleteBook={this.handleDeleteBook}
+                                    />
+                                )
+                            })}
+                        </div>
                 </div>
             </div>
         );
