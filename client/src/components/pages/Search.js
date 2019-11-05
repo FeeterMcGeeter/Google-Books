@@ -17,6 +17,7 @@ class Search extends Component {
             .then(res => {
                 this.setState({ books: res.data });
                 console.log('Books: ', this.state.books)
+                console.log(res.data);
             })
             .catch(err => {
                 throw err;
@@ -43,10 +44,10 @@ class Search extends Component {
     handleSavedBooks = event => {
         event.preventDefault();
         const bookId = event.target.getAttribute('data-id');
-        // console.log(bookId);
-        const newState = { ...this.state };
+        // // console.log(bookId);
+        // const newState = { ...this.state };
 
-        let targetBook = this.state.results.find(book => book.id === bookId);
+        const targetBook = this.state.results.find(book => book.id === bookId);
 
         const newBook = {
             title: targetBook.volumeInfo.title,
@@ -56,16 +57,17 @@ class Search extends Component {
             link: targetBook.volumeInfo.infoLink
         };
 
-        if (this.state.books[bookId]) {
-            console.log('Book already saved!');
-            return
-        } else {
-            newState.books[bookId] = newBook;
-            this.setState(newState);
+        API.saveBook(newBook)
+        .then(console.log)
+
+        // if (this.state.books[bookId]) {
+        //     console.log('Book already saved!');
+        //     return
+        // } else {
+        //     newState.books[bookId] = newBook;
+        //     this.setState(newState);
              
-            API.saveBook(newBook)
-            .then(console.log)
-        }
+        // }
     };
 
     render() {

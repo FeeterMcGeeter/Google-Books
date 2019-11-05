@@ -73,4 +73,5 @@ const ResultCard = ({ title, link, id, authors, image, description, saveBook, de
     }
 }
 
+
 export default ResultCard;

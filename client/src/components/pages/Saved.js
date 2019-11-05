@@ -13,7 +13,6 @@ class Saved extends Component {
         API.getBooks()
             .then(res => {
                 this.setState({ results: res.data });
-                console.log('Results:', this.state.results);
             })
             .catch(err => {
                 console.log(err);
@@ -47,18 +46,20 @@ class Saved extends Component {
                         <h3>Saved Books</h3>
                         <div className='container-fluid' id='mainContent'>
                             {this.state.results.map((book) => {
-                                return (
-                                    <ResultCard
-                                        key={book._id}
-                                        title={book.title}
-                                        id={book._id}
-                                        link={book.infoLink}
-                                        author={book.authors[0]}
-                                        image={book.image}
-                                        description={book.description}
-                                        deleteBook={this.handleDeleteBook}
-                                    />
-                                )
+                                const { _id, title, infoLink, authors, image, description } = book;
+                                console.log(book);
+                                // return (
+                                //     <ResultCard
+                                //         key={_id}
+                                //         title={title}
+                                //         id={_id}
+                                //         link={infoLink}
+                                //         author={authors && authors[0]}
+                                //         image={image}
+                                //         description={description}
+                                //         deleteBook={this.handleDeleteBook}
+                                //     />
+                                // )
                             })}
                         </div>
                 </div>

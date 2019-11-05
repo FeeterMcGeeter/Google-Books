@@ -1,7 +1,7 @@
 {
   "name": "google-books",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "Google Books Search",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/FeeterMcGeeter/Google-Books#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.7.7"

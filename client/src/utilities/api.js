@@ -9,13 +9,13 @@ export default {
     getBooks: function() {
         return axios.get('/api/books');
     },
-    // GETTING BOOKS BY ID
-    getBookById: function(id) {
-        return axios.get('/api/books/' + id);
-    },
+    // // GETTING BOOKS BY ID
+    // getBookById: function(id) {
+    //     return axios.get('/api/books/' + id);
+    // },
     // SAVING A BOOK TO THE DATABASE
-    saveBook: function(newBook) {
-        return axios.post('/api/books/', newBook);
+    saveBook: function(bookData) {
+        return axios.post('/api/books/', bookData);
     },
     // DELETING A BOOK BY ID
     deleteBook: function(id) {
