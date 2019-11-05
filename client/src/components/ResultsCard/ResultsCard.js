@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../Button/Button'
 
-const ResultCard = ({ title, link, id, authors, image, description, saveBook, deleteBook }) => {
+const ResultsCard = ({ title, link, id, authors, image, description, saveBook, deleteBook }) => {
     if (!saveBook) {
         return (
             <div id='resultCard'>
@@ -19,7 +19,7 @@ const ResultCard = ({ title, link, id, authors, image, description, saveBook, de
                         </Button>
                         <Button
                             id={id}
-                            onClick={(event) => deleteBook(event)}
+                            onClick={(event) => deleteBook(event, id)}
                         >Delete
                         </Button>
                     </span>
@@ -74,4 +74,4 @@ const ResultCard = ({ title, link, id, authors, image, description, saveBook, de
 }
 
 
-export default ResultCard;
+export default ResultsCard;

@@ -19,9 +19,8 @@ class Saved extends Component {
             })
     };
 
-    handleDeleteBook = event => {
+    handleDeleteBook = (event, bookID) => {
         event.preventDefault();
-        const bookID = event.target.getAttribute('data-id');
         const newState = { ...this.state };
         newState.results = this.state.results.filter(book => book._id !== bookID)
 
@@ -46,20 +45,15 @@ class Saved extends Component {
                         <h3>Saved Books</h3>
                         <div className='container-fluid' id='mainContent'>
                             {this.state.results.map((book) => {
-                                const { _id, title, infoLink, authors, image, description } = book;
-                                console.log(book);
-                                // return (
-                                //     <ResultCard
-                                //         key={_id}
-                                //         title={title}
-                                //         id={_id}
-                                //         link={infoLink}
-                                //         author={authors && authors[0]}
-                                //         image={image}
-                                //         description={description}
-                                //         deleteBook={this.handleDeleteBook}
-                                //     />
-                                // )
+                                const { _id, ...bookInfo } = book;
+                                return (
+                                    <ResultCard
+                                        key={_id}
+                                        id={_id}
+                                        {...bookInfo}
+                                        deleteBook={this.handleDeleteBook}
+                                    />
+                                )
                             })}
                         </div>
                 </div>
